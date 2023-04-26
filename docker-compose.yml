@@ -98,6 +98,17 @@ services:
       - elasticsearch
     restart: unless-stopped
 
+  postgres:
+    image: postgres:14
+    container_name: elk_postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # restart: always
+    environment:
+      POSTGRES_PASSWORD: geheim
+    ports:
+      - 5433:5432
+
 networks:
   elk:
     driver: bridge
@@ -105,3 +116,4 @@ networks:
 volumes:
   setup:
   elasticsearch:
+  pgdata:
